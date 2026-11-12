@@ -49,6 +49,9 @@ def build_qaoa(cost_op: SparsePauliOp, reps: int, mixer: str = "x", groups=None)
             for g in groups:
                 for a, b in ring_pairs(g):
                     qc.append(XXPlusYYGate(2 * betas[r]), [a, b])
+    # Expand the diagonal cost evolution into RZ/RZZ gates once; simulating the
+    # PauliEvolutionGate directly builds a matrix exponential on every call (~0.5 s).
+    qc = qc.decompose(gates_to_decompose=["PauliEvolution"])
     return qc, list(gammas), list(betas)
 
 

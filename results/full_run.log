@@ -1,0 +1,36 @@
+mu=0.25: exact optimum 20.0 via [[1, 2, 1]]; Ising mapping error 0.00e+00; NumPy eigensolver {'fval': 20.0, 'choice': [1, 2, 1]}
+  q=9 mu=0.25 x  p=1  P(feasible)=0.318  P(optimal)=0.013  ratio=0.577  best=[1, 2, 1] (2.13s)
+  q=9 mu=0.25 x  p=2  P(feasible)=0.807  P(optimal)=0.033  ratio=0.580  best=[1, 2, 1] (19.24s)
+  q=9 mu=0.25 x  p=3  P(feasible)=0.805  P(optimal)=0.032  ratio=0.579  best=[1, 2, 2] (44.57s)
+  q=9 mu=0.25 xy p=1  P(feasible)=1.000  P(optimal)=0.028  ratio=0.897  best=[1, 1, 1] (47.14s)
+  q=9 mu=0.25 xy p=2  P(feasible)=1.000  P(optimal)=0.410  ratio=0.925  best=[1, 2, 1] (74.3s)
+  q=9 mu=0.25 xy p=3  P(feasible)=1.000  P(optimal)=0.361  ratio=0.936  best=[1, 1, 1] (127.45s)
+mu=0.75: exact optimum 21.5 via [[1, 1, 2], [1, 2, 2]]; Ising mapping error 0.00e+00; NumPy eigensolver {'fval': 21.5, 'choice': [1, 1, 2]}
+  q=9 mu=0.75 x  p=1  P(feasible)=0.330  P(optimal)=0.026  ratio=0.665  best=[2, 1, 2] (1.58s)
+  q=9 mu=0.75 x  p=2  P(feasible)=0.854  P(optimal)=0.068  ratio=0.668  best=[1, 3, 2] (16.31s)
+  q=9 mu=0.75 x  p=3  P(feasible)=0.853  P(optimal)=0.067  ratio=0.667  best=[2, 1, 2] (41.5s)
+  q=9 mu=0.75 xy p=1  P(feasible)=1.000  P(optimal)=0.287  ratio=0.889  best=[1, 2, 2] (58.33s)
+  q=9 mu=0.75 xy p=2  P(feasible)=1.000  P(optimal)=0.418  ratio=0.927  best=[1, 2, 2] (88.41s)
+  q=9 mu=0.75 xy p=3  P(feasible)=1.000  P(optimal)=0.520  ratio=0.949  best=[1, 2, 2] (80.01s)
+mu=1.5: exact optimum 22.0 via [[1, 3, 2], [2, 1, 2], [3, 1, 2]]; Ising mapping error 0.00e+00; NumPy eigensolver {'fval': 22.0, 'choice': [2, 1, 2]}
+  q=9 mu=1.5  x  p=1  P(feasible)=0.340  P(optimal)=0.042  ratio=0.620  best=[1, 3, 2] (1.4s)
+  q=9 mu=1.5  x  p=2  P(feasible)=0.896  P(optimal)=0.112  ratio=0.624  best=[2, 1, 2] (13.56s)
+  q=9 mu=1.5  x  p=3  P(feasible)=0.896  P(optimal)=0.112  ratio=0.624  best=[2, 1, 2] (30.75s)
+  q=9 mu=1.5  xy p=1  P(feasible)=1.000  P(optimal)=0.296  ratio=0.860  best=[2, 1, 2] (48.24s)
+  q=9 mu=1.5  xy p=2  P(feasible)=1.000  P(optimal)=0.305  ratio=0.888  best=[2, 1, 2] (73.12s)
+  q=9 mu=1.5  xy p=3  P(feasible)=1.000  P(optimal)=0.324  ratio=0.899  best=[2, 1, 2] (80.48s)
+noise study (penalty QAOA, linear-chain hardware):
+  noise 2q-error=0.0    P(feasible)=0.889 P(optimal)=0.112
+  noise 2q-error=0.002  P(feasible)=0.645 P(optimal)=0.071
+  noise 2q-error=0.01   P(feasible)=0.236 P(optimal)=0.028
+noise study (XY-mixer QAOA, linear-chain hardware):
+  noise 2q-error=0.0    P(feasible)=1.000 P(optimal)=0.321
+  noise 2q-error=0.002  P(feasible)=0.594 P(optimal)=0.182
+  noise 2q-error=0.01   P(feasible)=0.135 P(optimal)=0.031
+scaling: 12 qubits, exact optimum 34.5
+  q=12 mu=1.5  x  p=1  P(feasible)=0.122  P(optimal)=0.001  ratio=0.527  best=[2, 2, 2, 1] (1.51s)
+  q=12 mu=1.5  x  p=2  P(feasible)=0.865  P(optimal)=0.012  ratio=0.565  best=[1, 2, 3, 1] (13.46s)
+  q=12 mu=1.5  xy p=1  P(feasible)=1.000  P(optimal)=0.001  ratio=0.633  best=[1, 1, 1, 1] (37.8s)
+  q=12 mu=1.5  xy p=2  P(feasible)=1.000  P(optimal)=0.054  ratio=0.799  best=[1, 2, 2, 1] (66.44s)
+
+wrote results\qaoa_results.csv and results\summary.json

@@ -1,0 +1,405 @@
+{
+  "instance": {
+    "n_drones": 3,
+    "n_paths": 3,
+    "n_qubits": 9,
+    "cost": [
+      [
+        7,
+        9,
+        9
+      ],
+      [
+        6,
+        6,
+        8
+      ],
+      [
+        6,
+        7,
+        8
+      ]
+    ],
+    "pareto_front": [
+      [
+        19,
+        4
+      ],
+      [
+        20,
+        2
+      ],
+      [
+        21,
+        1
+      ],
+      [
+        22,
+        0
+      ]
+    ]
+  },
+  "per_mu": {
+    "0.25": {
+      "exact_optimum": 20.0,
+      "exact_worst_feasible": 25.75,
+      "exact_optimal_assignments": [
+        [
+          1,
+          2,
+          1
+        ]
+      ],
+      "ising_max_error": 0.0,
+      "numpy_eigensolver": {
+        "fval": 20.0,
+        "choice": [
+          1,
+          2,
+          1
+        ]
+      },
+      "shots": {
+        "x": {
+          "reps": 3,
+          "shots": 4096,
+          "p_feasible": 0.7998046875,
+          "p_optimal": 0.03759765625,
+          "mean_objective_feasible": 22.409111721611723,
+          "approx_ratio_feasible": 0.5810240484153526,
+          "most_likely_feasible": [
+            1,
+            2,
+            1
+          ],
+          "most_likely_feasible_cost": 19.0,
+          "most_likely_feasible_conflicts": 4.0,
+          "most_likely_is_optimal": true,
+          "top_bitstring_feasible": true,
+          "random_guess_p_optimal": 0.001953125,
+          "top_counts": {
+            "001010001": 154,
+            "001010100": 147,
+            "010001010": 143,
+            "001100001": 132,
+            "010100001": 129,
+            "100010010": 128,
+            "010010001": 127,
+            "100010100": 125,
+            "001001001": 125,
+            "100010001": 124,
+            "001010010": 122,
+            "010001001": 121
+          }
+        },
+        "xy": {
+          "reps": 3,
+          "shots": 4096,
+          "p_feasible": 1.0,
+          "p_optimal": 0.35302734375,
+          "mean_objective_feasible": 20.3729248046875,
+          "approx_ratio_feasible": 0.9351435122282609,
+          "most_likely_feasible": [
+            1,
+            1,
+            1
+          ],
+          "most_likely_feasible_cost": 19.0,
+          "most_likely_feasible_conflicts": 6.0,
+          "most_likely_is_optimal": false,
+          "top_bitstring_feasible": true,
+          "random_guess_p_optimal": 0.001953125,
+          "top_counts": {
+            "001001001": 1862,
+            "001010001": 1446,
+            "010001001": 390,
+            "010010001": 250,
+            "001100001": 81,
+            "001010100": 25,
+            "001001100": 12,
+            "010001010": 6,
+            "100001001": 5,
+            "010010010": 3,
+            "010100010": 3,
+            "010100100": 2
+          }
+        }
+      }
+    },
+    "0.75": {
+      "exact_optimum": 21.5,
+      "exact_worst_feasible": 27.25,
+      "exact_optimal_assignments": [
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          2
+        ]
+      ],
+      "ising_max_error": 0.0,
+      "numpy_eigensolver": {
+        "fval": 21.5,
+        "choice": [
+          1,
+          1,
+          2
+        ]
+      },
+      "shots": {
+        "x": {
+          "reps": 3,
+          "shots": 4096,
+          "p_feasible": 0.851806640625,
+          "p_optimal": 0.070556640625,
+          "mean_objective_feasible": 23.39445399828031,
+          "approx_ratio_feasible": 0.6705297394295116,
+          "most_likely_feasible": [
+            1,
+            2,
+            2
+          ],
+          "most_likely_feasible_cost": 20.0,
+          "most_likely_feasible_conflicts": 2.0,
+          "most_likely_is_optimal": true,
+          "top_bitstring_feasible": true,
+          "random_guess_p_optimal": 0.00390625,
+          "top_counts": {
+            "010010001": 149,
+            "100010100": 148,
+            "100010001": 143,
+            "010001010": 142,
+            "001010010": 140,
+            "001010100": 140,
+            "010001001": 140,
+            "010001100": 139,
+            "010100001": 137,
+            "001100001": 135,
+            "001010001": 133,
+            "100001010": 132
+          }
+        },
+        "xy": {
+          "reps": 3,
+          "shots": 4096,
+          "p_feasible": 1.0,
+          "p_optimal": 0.5244140625,
+          "mean_objective_feasible": 21.789306640625,
+          "approx_ratio_feasible": 0.9496858016304348,
+          "most_likely_feasible": [
+            1,
+            2,
+            2
+          ],
+          "most_likely_feasible_cost": 20.0,
+          "most_likely_feasible_conflicts": 2.0,
+          "most_likely_is_optimal": true,
+          "top_bitstring_feasible": true,
+          "random_guess_p_optimal": 0.00390625,
+          "top_counts": {
+            "010010001": 1410,
+            "001010010": 762,
+            "010001001": 738,
+            "001010001": 367,
+            "010001010": 296,
+            "010001100": 122,
+            "001010100": 103,
+            "010010010": 81,
+            "010010100": 57,
+            "001001010": 37,
+            "001100001": 17,
+            "100010001": 16
+          }
+        }
+      }
+    },
+    "1.5": {
+      "exact_optimum": 22.0,
+      "exact_worst_feasible": 29.5,
+      "exact_optimal_assignments": [
+        [
+          1,
+          3,
+          2
+        ],
+        [
+          2,
+          1,
+          2
+        ],
+        [
+          3,
+          1,
+          2
+        ]
+      ],
+      "ising_max_error": 0.0,
+      "numpy_eigensolver": {
+        "fval": 22.0,
+        "choice": [
+          2,
+          1,
+          2
+        ]
+      },
+      "shots": {
+        "x": {
+          "reps": 3,
+          "shots": 4096,
+          "p_feasible": 0.9013671875,
+          "p_optimal": 0.107666015625,
+          "mean_objective_feasible": 24.83748645720477,
+          "approx_ratio_feasible": 0.6216684723726975,
+          "most_likely_feasible": [
+            3,
+            2,
+            3
+          ],
+          "most_likely_feasible_cost": 23.0,
+          "most_likely_feasible_conflicts": 0.0,
+          "most_likely_is_optimal": false,
+          "top_bitstring_feasible": true,
+          "random_guess_p_optimal": 0.005859375,
+          "top_counts": {
+            "100010100": 167,
+            "001010010": 164,
+            "010001100": 157,
+            "010001001": 156,
+            "001100001": 151,
+            "100010001": 150,
+            "010010010": 145,
+            "010001010": 145,
+            "100010010": 144,
+            "010100100": 143,
+            "001100010": 142,
+            "001001010": 142
+          }
+        },
+        "xy": {
+          "reps": 3,
+          "shots": 4096,
+          "p_feasible": 1.0,
+          "p_optimal": 0.334716796875,
+          "mean_objective_feasible": 22.7391357421875,
+          "approx_ratio_feasible": 0.9014485677083334,
+          "most_likely_feasible": [
+            2,
+            1,
+            2
+          ],
+          "most_likely_feasible_cost": 22.0,
+          "most_likely_feasible_conflicts": 0.0,
+          "most_likely_is_optimal": true,
+          "top_bitstring_feasible": true,
+          "random_guess_p_optimal": 0.005859375,
+          "top_counts": {
+            "010001010": 711,
+            "001010010": 579,
+            "010010001": 489,
+            "010010010": 438,
+            "010001100": 348,
+            "100010010": 334,
+            "010100001": 312,
+            "010010100": 277,
+            "010001001": 235,
+            "100010100": 183,
+            "100010001": 66,
+            "001010100": 63
+          }
+        }
+      },
+      "noise_x": {
+        "cx_all_to_all": 126,
+        "depth_all_to_all": 97,
+        "cx_linear_chain": 302,
+        "depth_linear_chain": 254,
+        "noise": [
+          {
+            "two_qubit_error": 0.0,
+            "p_feasible": 0.888671875,
+            "p_optimal": 0.112060546875,
+            "most_likely_feasible": [
+              3,
+              1,
+              2
+            ]
+          },
+          {
+            "two_qubit_error": 0.002,
+            "p_feasible": 0.64453125,
+            "p_optimal": 0.07080078125,
+            "most_likely_feasible": [
+              1,
+              3,
+              3
+            ]
+          },
+          {
+            "two_qubit_error": 0.01,
+            "p_feasible": 0.235595703125,
+            "p_optimal": 0.028076171875,
+            "most_likely_feasible": [
+              3,
+              3,
+              2
+            ]
+          }
+        ]
+      },
+      "noise_xy": {
+        "cx_all_to_all": 138,
+        "depth_all_to_all": 174,
+        "cx_linear_chain": 373,
+        "depth_linear_chain": 432,
+        "noise": [
+          {
+            "two_qubit_error": 0.0,
+            "p_feasible": 1.0,
+            "p_optimal": 0.32080078125,
+            "most_likely_feasible": [
+              2,
+              1,
+              2
+            ]
+          },
+          {
+            "two_qubit_error": 0.002,
+            "p_feasible": 0.59423828125,
+            "p_optimal": 0.18212890625,
+            "most_likely_feasible": [
+              2,
+              1,
+              2
+            ]
+          },
+          {
+            "two_qubit_error": 0.01,
+            "p_feasible": 0.134765625,
+            "p_optimal": 0.030517578125,
+            "most_likely_feasible": [
+              2,
+              1,
+              2
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "scaling_12q": {
+    "exact_optimum": 34.5,
+    "exact_optimal_assignments": [
+      [
+        1,
+        2,
+        3,
+        1
+      ]
+    ],
+    "ising_max_error": 0.0
+  }
+}

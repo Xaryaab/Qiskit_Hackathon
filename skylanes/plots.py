@@ -54,22 +54,22 @@ def draw_routes(ax, inst, choice, title):
     ax.set_title(title, fontsize=10)
     ax.set_aspect("equal")
     ax.axis("off")
-    ax.legend(loc="lower left", fontsize=7, frameon=False, bbox_to_anchor=(0, -0.28))
+    ax.legend(loc="upper center", fontsize=7, frameon=False, bbox_to_anchor=(0.5, 0.0))
 
 
 def fig_routes(inst, summary):
     mus = list(summary["per_mu"])
-    fig, axes = plt.subplots(1, len(mus), figsize=(4 * len(mus), 4.6))
+    fig, axes = plt.subplots(1, len(mus), figsize=(4.4 * len(mus), 5))
     axes = axes if len(mus) > 1 else [axes]
     for ax, mu in zip(axes, mus):
         s = summary["per_mu"][mu]["shots"]["xy"]
         ch = s["most_likely_feasible"]
         c, k = inst.evaluate(tuple(x - 1 for x in ch))
-        draw_routes(ax, inst, ch, f"mu={mu}: QAOA (XY) pick {ch}\ncost {c}, shared segments {k}"
-                                  f"{'  [exact optimum]' if s['most_likely_is_optimal'] else ''}")
-    fig.suptitle("SkyLanes: corridors chosen by QAOA (red = shared airspace segment)", fontsize=11)
-    fig.tight_layout()
-    fig.savefig(FIG / "routes.png", dpi=160)
+        draw_routes(ax, inst, ch, f"mu={mu}: QAOA (XY) pick {tuple(ch)}\ncost {c}, shared segments {k}"
+                                  f"{' (exact optimum)' if s['most_likely_is_optimal'] else ''}")
+    fig.suptitle("Corridors chosen by QAOA (red = shared segment)", fontsize=11)
+    fig.tight_layout(rect=(0, 0, 1, 0.93))
+    fig.savefig(FIG / "routes.png", dpi=160, bbox_inches="tight")
     plt.close(fig)
 
 
@@ -108,9 +108,14 @@ def fig_depth(rows):
                          color=COLORS[idx], label=label)
             axes[1].plot([r["reps"] for r in rr], [r["p_feasible"] for r in rr], ls, marker="o",
                          color=COLORS[idx], label=label)
-    guess = rows[0]["random_guess_p_optimal"]
-    axes[0].axhline(guess, color="gray", lw=0.8, ls=":", label="uniform random guess (mu=0.25)")
-    axes[0].set_title("P(sample is an exact optimum)", fontsize=10)
+    n_feasible = 3 ** 3  # 3 drones x 3 corridors
+    for idx, mu in enumerate(mus):
+        r0 = next(r for r in rows if r["mu"] == mu)
+        valid_guess = r0["random_guess_p_optimal"] * 2 ** 9 / n_feasible
+        axes[0].axhline(valid_guess, color=COLORS[idx], lw=0.9, ls=":", alpha=0.8,
+                        label=f"random valid plan mu={mu}")
+    axes[0].legend(fontsize=6.5, frameon=False, loc="upper left")
+    axes[0].set_title("P(sample is an exact optimum)  dotted = random valid plan", fontsize=10)
     axes[1].set_title("P(sample is feasible: one corridor per drone)", fontsize=10)
     for ax in axes:
         ax.set_xlabel("QAOA depth p")
@@ -130,13 +135,15 @@ def fig_histogram(inst, summary):
     for ax, mixer in zip(axes, ("x", "xy")):
         s = summary["per_mu"][mu]["shots"][mixer]
         items = list(s["top_counts"].items())[:10]
-        colors = []
+        colors, labels = [], []
         for key, _ in items:
             z = int(key, 2)
             colors.append("#2a9d6f" if land.optimal[z] else ("#2a6fdb" if land.feasible[z] else "#d62828"))
+            labels.append(str(tuple(int(c) + 1 for c in land.choice[z])) if land.feasible[z] else key)
         ax.bar(range(len(items)), [v / s["shots"] for _, v in items], color=colors)
         ax.set_xticks(range(len(items)))
-        ax.set_xticklabels([k for k, _ in items], rotation=70, fontsize=7, family="monospace")
+        ax.set_xticklabels(labels, rotation=60, fontsize=7, family="monospace")
+        ax.set_xlabel("corridor per drone (D1, D2, D3); raw bitstring if infeasible", fontsize=8)
         ax.set_title(f"{'Penalty' if mixer == 'x' else 'XY-mixer'} QAOA p={s['reps']}, mu={mu}: "
                      f"P(opt)={s['p_optimal']:.2f}, P(feasible)={s['p_feasible']:.2f}", fontsize=9)
     axes[0].set_ylabel("sample frequency (4096 shots)")

@@ -8,15 +8,30 @@ See [PROJECT_PLAN.md](PROJECT_PLAN.md) for the full formulation, algorithm justi
 
 ## Status
 
-Work in progress.
-
 - [x] Problem formulation and test instance
 - [x] Exact classical baseline (`baseline_bruteforce.py`), verified
-- [x] QuadraticProgram / QUBO / Ising formulation (`skylanes/formulation.py`)
+- [x] QuadraticProgram / QUBO / Ising formulation (`skylanes/formulation.py`); Ising mapping verified exact on all 512 bitstrings
 - [x] QAOA circuits: penalty (X mixer) and XY mixer (`skylanes/qaoa.py`)
-- [x] Experiment runner and plots (`skylanes/experiments.py`, `skylanes/plots.py`)
-- [ ] QAOA code run and verified against the exact optimum
-- [ ] Results, figures, report, demo video
+- [x] Full experiment run: results in `results/`, figures in `results/figures/`
+- [x] Report
+- [ ] Demo video
+
+## Headline results (9 qubits, noise-free, QAOA depth p = 3)
+
+| | Exact brute force | Penalty QAOA | XY-mixer QAOA |
+|---|---|---|---|
+| P(single sample is optimal) | 1.0 | 0.03–0.11 | 0.32–0.52 |
+| vs. picking a random valid plan | n/a | about 1x (no better) | 2.9–9.7x better |
+| P(sample is valid) | 1.0 | 0.81–0.90 | 1.00 |
+| Optimum found in 4,096 shots | n/a | yes, all 3 settings | yes, all 3 settings |
+| Time | 0.09 ms | 31–45 s tuning | 80–127 s tuning |
+
+Ranges cover the trade-off weights μ = 0.25, 0.75 and 1.5.
+
+- **Noise:** at 1% two-qubit depolarising error, both variants drop to P(optimal) ≈ 0.03.
+- **Hardware routing:** mapping onto a linear chain of qubits adds 2.4–2.7× CNOTs.
+
+No quantum speed-up is claimed. See [PROJECT_PLAN.md](PROJECT_PLAN.md) and `results/summary.json` for details.
 
 ## Layout
 
