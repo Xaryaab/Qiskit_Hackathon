@@ -1,4 +1,8 @@
-# SkyLanes: conflict-aware drone corridor routing with QAOA
+# SkyLanes: conflict-aware drone corridor routing with QAOA (original project plan)
+
+> **Note:** this is the plan written before implementation, kept for reference. For what was actually built and measured, see [README.md](README.md) and `SkyLanes_Report.docx`.
+> Built as planned: the formulation, exact baseline, penalty QAOA, XY-mixer QAOA, the μ and depth sweeps, shots, the Aer noise study and the 12-qubit scaling run.
+> Not built: the SamplingVQE comparison, the CVaR objective and the 16-qubit instance (listed as future work in the report).
 
 **Domain:** 1. UAVs & Robotics
 **One-line problem:** A drone-fleet dispatcher (e.g. a utility running post-storm power-line inspections) must give each of N drones one flight corridor out of a few candidates, trading total flight energy against shared airspace segments (collision risk / forced holding), with every drone flying exactly one corridor.

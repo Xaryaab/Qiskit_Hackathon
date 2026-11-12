@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SkyLanes dashboard</title>
+  <meta name="description" content="Conflict-aware drone corridor routing: exact classical search vs QAOA on 9 qubits, built with Qiskit.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M4 26 L16 6 L28 26 L16 20 Z' fill='%231B2A4A'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="masthead">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 26 L16 6 L28 26 L16 20 Z"/></svg>
+      <div>
+        <h1>SkyLanes</h1>
+        <p class="tagline">Three drones, three routes each, one shared sky. Classical search and QAOA pick the flight plan.</p>
+      </div>
+    </div>
+    <p class="stack" id="stack"></p>
+  </header>
+
+  <main>
+    <section class="cockpit" aria-label="Flight plan and controls">
+      <div class="chart-panel">
+        <div class="chart-head">
+          <h2 id="map-title">Flight plan</h2>
+          <div class="segmented" role="group" aria-label="Plan shown on the map">
+            <button type="button" data-view="quantum" aria-pressed="true">QAOA's top plan</button>
+            <button type="button" data-view="exact" aria-pressed="false">Exact best plan</button>
+          </div>
+        </div>
+        <svg id="map" viewBox="0 0 520 520" role="img" aria-labelledby="map-title"></svg>
+        <p class="map-legend" id="map-legend"></p>
+      </div>
+
+      <div class="controls">
+        <div class="control">
+          <label for="mu">Safety weight μ <output id="mu-out" for="mu"></output></label>
+          <input id="mu" type="range" min="0" max="3" step="0.05" value="1.5" list="mu-marks">
+          <datalist id="mu-marks"><option value="0.25"></option><option value="0.75"></option><option value="1.5"></option></datalist>
+          <p class="hint">Low μ favours cheap routes. High μ pays battery to keep drones apart. The marks at 0.25, 0.75 and 1.5 have full Qiskit runs.</p>
+        </div>
+
+        <div class="control">
+          <span class="control-label" id="mixer-label">How QAOA enforces "one route per drone"</span>
+          <div class="segmented wide" role="group" aria-labelledby="mixer-label">
+            <button type="button" data-mixer="x" aria-pressed="false">As a fine (penalty)</button>
+            <button type="button" data-mixer="xy" aria-pressed="true">Built into the circuit (XY mixer)</button>
+          </div>
+        </div>
+
+        <div class="control">
+          <span class="control-label" id="reps-label">Circuit depth p</span>
+          <div class="segmented" role="group" aria-labelledby="reps-label">
+            <button type="button" data-reps="1" aria-pressed="false">1</button>
+            <button type="button" data-reps="2" aria-pressed="true">2</button>
+            <button type="button" data-reps="3" aria-pressed="false">3</button>
+          </div>
+        </div>
+
+        <div class="control">
+          <span class="control-label" id="source-label">Where the quantum result comes from</span>
+          <div class="segmented wide" role="group" aria-labelledby="source-label">
+            <button type="button" data-source="qiskit" aria-pressed="true">Recorded Qiskit run</button>
+            <button type="button" data-source="live" aria-pressed="false">Optimise live in this browser</button>
+          </div>
+          <p class="hint" id="source-hint"></p>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="primary" id="run">Run QAOA</button>
+          <button type="button" id="shots">Sample 4,096 shots</button>
+        </div>
+        <p class="status" id="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="duel" aria-label="Classical versus quantum">
+      <article class="side classical">
+        <h3>Classical: check all 27 plans</h3>
+        <dl id="classical"></dl>
+      </article>
+      <article class="side quantum">
+        <h3 id="quantum-title">Quantum: QAOA</h3>
+        <dl id="quantum"></dl>
+      </article>
+      <p class="verdict" id="verdict" aria-live="polite"></p>
+    </section>
+
+    <section class="pair">
+      <figure>
+        <figcaption><h3>What the quantum computer answers</h3><p id="hist-sub">The 12 most likely outcomes. Green is an exact best plan, blue is a valid plan, magenta breaks the one-route rule.</p></figcaption>
+        <svg id="hist" viewBox="0 0 620 300" role="img" aria-label="Distribution of QAOA outcomes"></svg>
+      </figure>
+      <figure>
+        <figcaption><h3>The trade-off: battery against shared sky</h3><p>All 27 valid plans. The dashed line is every plan scoring the same as the best at this μ; plans on the black line cannot be improved on both goals at once.</p></figcaption>
+        <svg id="pareto" viewBox="0 0 620 300" role="img" aria-label="Cost versus conflicts for all 27 valid plans"></svg>
+      </figure>
+    </section>
+
+    <section class="pair">
+      <figure>
+        <figcaption><h3>Deeper circuits, two rule styles</h3><p id="depth-sub"></p></figcaption>
+        <svg id="depth" viewBox="0 0 620 280" role="img" aria-label="Chance of an exact best plan by circuit depth"></svg>
+      </figure>
+      <figure>
+        <figcaption><h3>On real hardware, noise and wiring cost</h3><p>Recorded Qiskit Aer run at μ = 1.5, depth 3, on a chain of qubits. Probabilities from 4,096 shots.</p></figcaption>
+        <div id="noise"></div>
+      </figure>
+    </section>
+
+    <section class="circuit">
+      <div class="circuit-text">
+        <h3>The circuit behind it</h3>
+        <p id="circuit-sub"></p>
+        <dl id="circuit-stats"></dl>
+        <p><a id="qasm" class="button-link" download>Download OpenQASM for IBM Quantum Composer</a></p>
+        <p class="hint">In Composer, open the code editor, paste the file and run it to see the same circuit and its probabilities.</p>
+      </div>
+      <div class="circuit-img"><img id="circuit-img" alt="Depth-1 QAOA circuit drawn by Qiskit"></div>
+    </section>
+
+    <section class="scale">
+      <h3>One more drone: 12 qubits</h3>
+      <p>Four drones, 81 valid plans out of 4,096 bitstrings, one exact best plan. Recorded Qiskit run at μ = 1.5.</p>
+      <div id="scaling"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p id="verify"></p>
+    <p>Code, data and full report: <a href="https://github.com/Xaryaab/Qiskit_Hackathon">github.com/Xaryaab/Qiskit_Hackathon</a>. No quantum speed-up is claimed: at this size checking every plan is exact and far faster.</p>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

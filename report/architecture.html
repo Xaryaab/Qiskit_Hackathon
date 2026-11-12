@@ -1,0 +1,83 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #fff; }
+  svg { display: block; font-family: 'Barlow', sans-serif; }
+  .h { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; }
+</style></head>
+<body>
+<svg id="arch" width="1600" height="830" viewBox="0 0 1600 830" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#4A5A78"/></marker>
+    <marker id="m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#B0287A"/></marker>
+  </defs>
+  <rect width="1600" height="830" fill="#ffffff"/>
+  <text x="40" y="54" class="h" font-size="34" fill="#1B2A4A">SkyLanes architecture: a classical loop tunes the quantum circuit; an exact baseline scores every result</text>
+
+  <!-- lanes -->
+  <rect x="30" y="90" width="1540" height="200" rx="14" fill="#F3F6F2" stroke="#C3CFC8"/>
+  <text x="50" y="122" font-size="20" font-weight="600" fill="#4A5A78">Classical pre-processing (skylanes/instance.py, formulation.py)</text>
+  <rect x="30" y="310" width="1540" height="250" rx="14" fill="#EEF3FB" stroke="#B9C9E6"/>
+  <text x="50" y="342" font-size="20" font-weight="600" fill="#2C5DA8">Hybrid quantum-classical loop (skylanes/qaoa.py, Qiskit 2.6.2)</text>
+  <rect x="30" y="580" width="1540" height="225" rx="14" fill="#F3F6F2" stroke="#C3CFC8"/>
+  <text x="50" y="612" font-size="20" font-weight="600" fill="#4A5A78">Validation and outputs</text>
+
+  <g font-size="18" fill="#1B2A4A">
+    <!-- row 1 -->
+    <g><rect x="60" y="145" width="300" height="120" rx="10" fill="#fff" stroke="#1B2A4A" stroke-width="1.6"/>
+      <text x="210" y="185" text-anchor="middle" class="h" font-size="26">Instance</text>
+      <text x="210" y="215" text-anchor="middle">4×4 airspace grid, segment</text><text x="210" y="238" text-anchor="middle">costs (seed 3), 3 drones</text></g>
+    <g><rect x="440" y="145" width="300" height="120" rx="10" fill="#fff" stroke="#1B2A4A" stroke-width="1.6"/>
+      <text x="590" y="185" text-anchor="middle" class="h" font-size="26">Candidate corridors</text>
+      <text x="590" y="215" text-anchor="middle">3 cheapest distinct paths per</text><text x="590" y="238" text-anchor="middle">drone; shared-segment counts</text></g>
+    <g><rect x="820" y="145" width="320" height="120" rx="10" fill="#fff" stroke="#1B2A4A" stroke-width="1.6"/>
+      <text x="980" y="185" text-anchor="middle" class="h" font-size="26">QuadraticProgram</text>
+      <text x="980" y="215" text-anchor="middle">9 binaries x(i,p), cost + μ·shared,</text><text x="980" y="238" text-anchor="middle">one-hot constraint per drone</text></g>
+    <g><rect x="1220" y="145" width="320" height="120" rx="10" fill="#fff" stroke="#1B2A4A" stroke-width="1.6"/>
+      <text x="1380" y="185" text-anchor="middle" class="h" font-size="26">QUBO → Ising</text>
+      <text x="1380" y="215" text-anchor="middle">penalty P or constraint-free;</text><text x="1380" y="238" text-anchor="middle">9-qubit SparsePauliOp, verified</text></g>
+    <path d="M360 205 H436" stroke="#4A5A78" stroke-width="2.5" marker-end="url(#a)"/>
+    <path d="M740 205 H816" stroke="#4A5A78" stroke-width="2.5" marker-end="url(#a)"/>
+    <path d="M1140 205 H1216" stroke="#4A5A78" stroke-width="2.5" marker-end="url(#a)"/>
+
+    <!-- row 2 -->
+    <g><rect x="1220" y="375" width="320" height="150" rx="10" fill="#DCE6F6" stroke="#2C5DA8" stroke-width="3"/>
+      <text x="1380" y="415" text-anchor="middle" class="h" font-size="26">QAOA circuit, depth p = 1–3</text>
+      <text x="1380" y="445" text-anchor="middle">A: |+⟩ⁿ start, RX mixer (penalty)</text><text x="1380" y="470" text-anchor="middle">B: W-state per drone, XY ring</text><text x="1380" y="495" text-anchor="middle">mixer (rule built in)</text></g>
+    <g><rect x="820" y="375" width="320" height="150" rx="10" fill="#fff" stroke="#2C5DA8" stroke-width="1.8"/>
+      <text x="980" y="415" text-anchor="middle" class="h" font-size="26">Simulate</text>
+      <text x="980" y="445" text-anchor="middle">Statevector (exact ⟨f⟩),</text><text x="980" y="470" text-anchor="middle">StatevectorSampler 4,096 shots,</text><text x="980" y="495" text-anchor="middle">Aer with depolarising noise</text></g>
+    <g><rect x="440" y="375" width="300" height="150" rx="10" fill="#fff" stroke="#2C5DA8" stroke-width="1.8"/>
+      <text x="590" y="415" text-anchor="middle" class="h" font-size="26">COBYLA optimiser</text>
+      <text x="590" y="445" text-anchor="middle">minimise ⟨f⟩ over γ, β;</text><text x="590" y="470" text-anchor="middle">8 seeded starts + INTERP</text><text x="590" y="495" text-anchor="middle">warm start from depth p−1</text></g>
+    <path d="M1380 265 V371" stroke="#4A5A78" stroke-width="2.5" marker-end="url(#a)"/>
+    <path d="M1220 450 H1144" stroke="#4A5A78" stroke-width="2.5" marker-end="url(#a)"/>
+    <path d="M820 450 H744" stroke="#4A5A78" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="782" y="440" text-anchor="middle" font-size="16" fill="#4A5A78">⟨f⟩</text>
+    <path d="M590 375 V358 H1300 V371" fill="none" stroke="#B0287A" stroke-width="2.5" stroke-dasharray="9 7" marker-end="url(#m)"/>
+    <text x="945" y="350" text-anchor="middle" font-size="17" font-weight="600" fill="#B0287A">new angles γ, β, repeat</text>
+
+    <!-- row 3 -->
+    <g><rect x="60" y="640" width="320" height="150" rx="10" fill="#fff" stroke="#1B2A4A" stroke-width="1.6"/>
+      <text x="220" y="680" text-anchor="middle" class="h" font-size="26">Exact baseline</text>
+      <text x="220" y="712" text-anchor="middle">brute force over all 27 plans</text><text x="220" y="737" text-anchor="middle">+ NumPyMinimumEigensolver</text><text x="220" y="762" text-anchor="middle">cross-check; Pareto front</text></g>
+    <g><rect x="460" y="640" width="340" height="150" rx="10" fill="#fff" stroke="#1B2A4A" stroke-width="1.6"/>
+      <text x="630" y="680" text-anchor="middle" class="h" font-size="26">Decode and score</text>
+      <text x="630" y="712" text-anchor="middle">P(feasible), P(optimal),</text><text x="630" y="737" text-anchor="middle">approximation ratio, most</text><text x="630" y="762" text-anchor="middle">likely plan vs exact optimum</text></g>
+    <g><rect x="880" y="640" width="320" height="150" rx="10" fill="#fff" stroke="#1B2A4A" stroke-width="1.6"/>
+      <text x="1040" y="680" text-anchor="middle" class="h" font-size="26">Results and figures</text>
+      <text x="1040" y="712" text-anchor="middle">results/qaoa_results.csv,</text><text x="1040" y="737" text-anchor="middle">summary.json, figures/*.png</text></g>
+    <g><rect x="1280" y="640" width="260" height="150" rx="10" fill="#fff" stroke="#1B2A4A" stroke-width="1.6"/>
+      <text x="1410" y="680" text-anchor="middle" class="h" font-size="26">Live dashboard</text>
+      <text x="1410" y="712" text-anchor="middle">browser re-simulation,</text><text x="1410" y="737" text-anchor="middle">matches Qiskit to 5×10⁻⁹</text></g>
+    <path d="M980 525 V600 H630 V636" fill="none" stroke="#4A5A78" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="800" y="592" text-anchor="middle" font-size="16" fill="#4A5A78">best angles, sampled</text>
+    <path d="M210 265 V290 H40 V715 H56" fill="none" stroke="#4A5A78" stroke-width="2.5" marker-end="url(#a)"/>
+    <path d="M380 715 H456" stroke="#4A5A78" stroke-width="2.5" marker-end="url(#a)"/>
+    <text x="418" y="705" text-anchor="middle" font-size="16" fill="#4A5A78">optimum</text>
+    <path d="M800 715 H876" stroke="#4A5A78" stroke-width="2.5" marker-end="url(#a)"/>
+    <path d="M1200 715 H1276" stroke="#4A5A78" stroke-width="2.5" marker-end="url(#a)"/>
+  </g>
+</svg>
+</body></html>

@@ -1,0 +1,136 @@
+/* Aeronautical-chart palette: chart paper, navy ink, sectional magenta for restricted airspace. */
+:root {
+  --paper: #EEF2EC;
+  --paper-deep: #E2E9E3;
+  --ink: #1B2A4A;
+  --ink-soft: #4A5A78;
+  --rule: #C3CFC8;
+  --airway: #2C5DA8;
+  --magenta: #B0287A;
+  --good: #2E8B57;
+  --tan: #D8C9A3;
+  --drone-1: #2C5DA8;
+  --drone-2: #C98A1B;
+  --drone-3: #2E8B73;
+  --panel: #F7F9F5;
+  --font: 'Barlow', system-ui, sans-serif;
+  --font-cond: 'Barlow Condensed', 'Barlow', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 16px/1.5 var(--font);
+  font-variant-numeric: tabular-nums;
+}
+
+.masthead {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;
+  padding: 28px clamp(16px, 4vw, 48px) 20px;
+  border-bottom: 2px solid var(--ink);
+}
+.brand { display: flex; gap: 16px; align-items: center; }
+.brand-mark { width: 44px; height: 44px; fill: var(--ink); flex: none; }
+h1 { font: 700 44px/1 var(--font-cond); letter-spacing: 0.01em; margin: 0; }
+.tagline { margin: 6px 0 0; color: var(--ink-soft); max-width: 62ch; }
+.stack { margin: 0; color: var(--ink-soft); font-size: 14px; }
+
+main { padding: 0 clamp(16px, 4vw, 48px) 32px; }
+h2, h3 { font-family: var(--font-cond); font-weight: 600; margin: 0; }
+h2 { font-size: 26px; }
+h3 { font-size: 22px; }
+
+/* --- cockpit: map + controls ------------------------------------------- */
+.cockpit {
+  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(300px, 1fr); gap: clamp(20px, 3vw, 40px);
+  padding: 28px 0; border-bottom: 1px solid var(--rule);
+}
+.chart-panel { min-width: 0; }
+.chart-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+#map { width: 100%; max-width: 640px; display: block; background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; }
+.map-legend { margin: 10px 0 0; font-size: 15px; color: var(--ink-soft); min-height: 1.5em; }
+
+.controls { display: flex; flex-direction: column; gap: 22px; padding-top: 4px; }
+.control label, .control-label { display: block; font: 600 18px/1.3 var(--font-cond); margin-bottom: 8px; }
+output { font-family: var(--font); font-weight: 600; color: var(--airway); margin-left: 6px; }
+.hint { margin: 6px 0 0; font-size: 14px; color: var(--ink-soft); max-width: 60ch; }
+input[type=range] { width: 100%; accent-color: var(--ink); height: 28px; }
+
+.segmented { display: inline-flex; border: 1.5px solid var(--ink); border-radius: 6px; overflow: hidden; }
+.segmented.wide { display: flex; }
+.segmented button {
+  flex: 1; font: 500 15px/1.2 var(--font); color: var(--ink); background: transparent;
+  border: 0; border-left: 1.5px solid var(--ink); padding: 9px 14px; cursor: pointer; min-height: 40px;
+}
+.segmented button:first-child { border-left: 0; }
+.segmented button[aria-pressed=true] { background: var(--ink); color: var(--paper); }
+.segmented button:disabled { color: var(--rule); cursor: not-allowed; }
+
+.actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.actions button {
+  font: 600 17px/1 var(--font-cond); letter-spacing: 0.02em; padding: 13px 20px; border-radius: 6px;
+  border: 1.5px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer;
+}
+.actions button.primary { background: var(--airway); border-color: var(--airway); color: #fff; }
+.actions button:disabled { opacity: 0.5; cursor: progress; }
+.status { margin: 0; font-size: 15px; color: var(--ink-soft); min-height: 1.5em; }
+
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid var(--magenta); outline-offset: 2px; }
+
+/* --- duel: classical vs quantum --------------------------------------- */
+.duel {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 24px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.side { padding: 4px 28px 8px 0; }
+.side.quantum { padding: 4px 0 8px 28px; border-left: 2px solid var(--ink); }
+.side h3 { margin-bottom: 12px; }
+.side dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; }
+.side dt { color: var(--ink-soft); font-size: 15px; }
+.side dd { margin: 0; font-weight: 600; font-size: 17px; }
+.side dd .big { font: 700 34px/1 var(--font-cond); }
+.verdict {
+  grid-column: 1 / -1; margin: 18px 0 0; padding: 12px 16px; background: var(--paper-deep);
+  border-left: 4px solid var(--airway); font-size: 17px; max-width: none;
+}
+
+/* --- figure pairs ------------------------------------------------------ */
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 3vw, 40px); padding: 28px 0; border-bottom: 1px solid var(--rule); }
+figure { margin: 0; min-width: 0; }
+figcaption p { margin: 4px 0 12px; font-size: 15px; color: var(--ink-soft); max-width: 70ch; }
+.pair svg { width: 100%; display: block; }
+svg text { font-family: var(--font); fill: var(--ink); }
+
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: right; padding: 7px 10px; border-bottom: 1px solid var(--rule); }
+th:first-child, td:first-child { text-align: left; }
+thead th { font: 600 15px/1.2 var(--font-cond); color: var(--ink-soft); border-bottom: 1.5px solid var(--ink); }
+.note { font-size: 14px; color: var(--ink-soft); margin: 10px 0 0; }
+
+/* --- circuit + scaling ------------------------------------------------- */
+.circuit { display: grid; grid-template-columns: minmax(260px, 0.8fr) minmax(0, 2fr); gap: clamp(20px, 3vw, 40px); padding: 28px 0; border-bottom: 1px solid var(--rule); }
+.circuit-text p { margin: 6px 0 12px; }
+.circuit-text dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; margin: 0 0 14px; font-size: 15px; }
+.circuit-text dt { color: var(--ink-soft); }
+.circuit-text dd { margin: 0; font-weight: 600; }
+.button-link { display: inline-block; font-weight: 600; color: var(--ink); border: 1.5px solid var(--ink); border-radius: 6px; padding: 9px 14px; text-decoration: none; }
+.circuit-img { background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 10px; overflow-x: auto; }
+.circuit-img img { display: block; max-width: 100%; height: auto; }
+.scale { padding: 28px 0; }
+.scale p { margin: 4px 0 12px; color: var(--ink-soft); font-size: 15px; }
+#scaling table { max-width: 760px; }
+
+footer { padding: 18px clamp(16px, 4vw, 48px) 36px; border-top: 2px solid var(--ink); font-size: 14px; color: var(--ink-soft); }
+footer p { margin: 4px 0; }
+footer a { color: var(--ink); }
+
+@media (max-width: 900px) {
+  .cockpit, .pair, .circuit, .duel { grid-template-columns: 1fr; }
+  .side.quantum { border-left: 0; border-top: 2px solid var(--ink); padding: 16px 0 0; margin-top: 12px; }
+  .side { padding-right: 0; }
+  h1 { font-size: 36px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }

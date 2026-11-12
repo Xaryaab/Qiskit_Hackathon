@@ -6,6 +6,25 @@ __pycache__/
 # Organiser's brief (not ours to publish)
 Qiskit_Hackathon_Optimization.docx
 
+# Local tooling
+.vercel/
+.claude/
+
+# Video production: large or regenerable files
+node_modules/
+video/models/
+video/frames/
+video/check/
+video/remotion/out/
+video/remotion/public/clips/
+video/remotion/public/voice/
+*.wav
+*.mp4
+.env*
+
+# Office lock files
+~$*
+
 # Editors / OS
 .vscode/
 .idea/
