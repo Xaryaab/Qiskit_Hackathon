@@ -10,7 +10,7 @@ After a storm, three inspection drones must each fly one of three candidate corr
 |---|---|
 | Working, reproducible Qiskit code | this repository (run it with [How to run](#how-to-run)) |
 | Report (.docx) with results, classical/exact comparison and limitations | [`SkyLanes_Report.docx`](SkyLanes_Report.docx) |
-| Architecture diagram (also in the report) | [`report/architecture.png`](report/architecture.png) |
+| Architecture diagram (also in the report) | [`SkyLanes_Architecture.png`](SkyLanes_Architecture.png) and vector [`SkyLanes_Architecture.pdf`](SkyLanes_Architecture.pdf) |
 | 3-minute video pitch and demo | _Google Drive link: to be added_ |
 | Live interactive dashboard | https://skylanes-dashboard.vercel.app |
 
