@@ -111,8 +111,8 @@ children.push(
   table(['Deliverable', 'Where'], [
     ['Code (Qiskit, reproducible)', 'github.com/Xaryaab/Qiskit_Hackathon'],
     ['Live dashboard', 'skylanes-dashboard.vercel.app'],
-    ['3-minute video pitch and demo', '[add the Google Drive link]'],
-    ['Team', '[team name and members]'],
+    ['3-minute video pitch and demo', 'https://drive.google.com/file/d/11F9CN1hYq2xqkPHU1g7RvhgXAlBYSZxN/view?usp=sharing'],
+    ['Team', 'InevitableWinners | 3 members'],
   ], [3, 5], { leftAll: true }),
   gap(200),
 );

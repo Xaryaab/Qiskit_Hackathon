@@ -1,6 +1,6 @@
 # SkyLanes: conflict-aware drone corridor routing with QAOA
 
-**IBM Qiskit Hackathon: The Quantum Optimization Challenge. Domain: UAVs & Robotics.**
+**IBM Qiskit Hackathon: The Quantum Optimization Challenge. Domain: UAVs & Robotics. Team: InevitableWinners (3 members).**
 
 After a storm, three inspection drones must each fly one of three candidate corridors. The dispatcher wants **low total battery use** and **few shared airspace segments**, two goals that pull against each other, and every drone's choice affects the others. SkyLanes encodes the joint choice as a **9-qubit QUBO**, solves it with **QAOA in Qiskit** in two versions (the one-route rule as a penalty, and the rule built into the circuit with an **XY mixer**), and scores every quantum result against an **exact classical baseline**.
 
@@ -11,7 +11,7 @@ After a storm, three inspection drones must each fly one of three candidate corr
 | Working, reproducible Qiskit code | this repository (run it with [How to run](#how-to-run)) |
 | Report (.docx) with results, classical/exact comparison and limitations | [`SkyLanes_Report.docx`](SkyLanes_Report.docx) |
 | Architecture diagram (also in the report) | [`SkyLanes_Architecture.png`](SkyLanes_Architecture.png) and vector [`SkyLanes_Architecture.pdf`](SkyLanes_Architecture.pdf) |
-| 3-minute video pitch and demo | _Google Drive link: to be added_ |
+| 3-minute video pitch and demo | [Watch on Google Drive](https://drive.google.com/file/d/11F9CN1hYq2xqkPHU1g7RvhgXAlBYSZxN/view?usp=sharing) |
 | Live interactive dashboard | https://skylanes-dashboard.vercel.app |
 
 ![SkyLanes architecture](report/architecture.png)
