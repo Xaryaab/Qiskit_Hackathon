@@ -1,0 +1,13 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Organiser's brief (not ours to publish)
+Qiskit_Hackathon_Optimization.docx
+
+# Editors / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
