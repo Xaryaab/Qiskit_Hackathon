@@ -2,16 +2,18 @@
 
 **IBM Qiskit Hackathon: The Quantum Optimization Challenge. Domain: UAVs & Robotics. Team: InevitableWinners (3 members).**
 
+*Completed project (November 2026), kept as a record of the work: code, results, report, video and a live dashboard.*
+
 After a storm, three inspection drones must each fly one of three candidate corridors. The dispatcher wants **low total battery use** and **few shared airspace segments**, two goals that pull against each other, and every drone's choice affects the others. SkyLanes encodes the joint choice as a **9-qubit QUBO**, solves it with **QAOA in Qiskit** in two versions (the one-route rule as a penalty, and the rule built into the circuit with an **XY mixer**), and scores every quantum result against an **exact classical baseline**.
 
-## Deliverables
+## Project materials
 
-| Deliverable | Where |
+| Material | Where |
 |---|---|
 | Working, reproducible Qiskit code | this repository (run it with [How to run](#how-to-run)) |
 | Report (.docx) with results, classical/exact comparison and limitations | [`SkyLanes_Report.docx`](SkyLanes_Report.docx) |
 | Architecture diagram (also in the report) | [`SkyLanes_Architecture.png`](SkyLanes_Architecture.png) and vector [`SkyLanes_Architecture.pdf`](SkyLanes_Architecture.pdf) |
-| 3-minute video pitch and demo | [Watch on Google Drive](https://drive.google.com/file/d/11F9CN1hYq2xqkPHU1g7RvhgXAlBYSZxN/view?usp=sharing) |
+| 3-minute video pitch and demo | [`SkyLanes_demo.mp4`](SkyLanes_demo.mp4) in this repo, or [watch on Google Drive](https://drive.google.com/file/d/11F9CN1hYq2xqkPHU1g7RvhgXAlBYSZxN/view?usp=sharing) |
 | Live interactive dashboard | https://skylanes-dashboard.vercel.app |
 
 ![SkyLanes architecture](report/architecture.png)
@@ -199,8 +201,6 @@ This regenerates `SkyLanes_Report.docx` from the recorded results. `report/archi
 | `results/` | Recorded results (CSV, JSON, figures) behind every number in the report |
 | `dashboard/` | Static dashboard, Qiskit data exporter, simulator check against Qiskit |
 | `report/` | Report builder (`build_report.js`) and architecture diagram source |
-| `video/` | Pipeline that made the demo video: script, Kokoro voice-over, dashboard capture, Remotion animation |
-| `PROJECT_PLAN.md` | The original plan, kept for reference |
 
 ## Reproducibility notes
 
